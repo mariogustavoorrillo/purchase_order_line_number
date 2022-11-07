@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+      <record id="pol_purchase_order_line_form" model="ir.ui.view">
+            <field name="name">pol.purchase.order.line.form</field>
+	    <field name="model">purchase.order</field>
+	    <field name="inherit_id" ref="purchase.purchase_order_form"></field>
+	    <field name="arch" type="xml">
+		<xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+			    <field name="purchase_order_line_number" />
+		</xpath>
+            </field>
+    </record>
+
+    <template id="pol_report_purchase_order_document" inherit_id="purchase.report_purchaseorder_document">
+	    	<xpath expr="//th[@name='th_description']" position="before">
+			<th name="th_order_line_number"><strong>#</strong></th>
+		</xpath>
+		<xpath expr="//td[@id='product']" position="before">
+			<td id="td_line_number"><span t-field="line.purchase_order_line_number"></span></td>
+		</xpath>
+	</template>
+
+    <template id="pol_report_purchase_quotation_document" inherit_id="purchase.report_purchasequotation_document">
+	    	<xpath expr="//th[@name='th_description']" position="before">
+			<th name="th_order_line_number"><strong>#</strong></th>
+		</xpath>
+		<xpath expr="//td[@id='product']" position="before">
+			<td id="td_line_number"><span t-field="order_line.purchase_order_line_number"></span></td>
+		</xpath>
+	</template>
+
+
+</odoo>
